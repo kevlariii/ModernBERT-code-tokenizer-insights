@@ -10,6 +10,13 @@ One of the key claims in the paper is that ModernBERT's tokenizer—built using 
 
 The objective of this analysis is to rigorously evaluate ModernBERT's tokenizer in the context of **code tokenization** and compare its performance to that of [BERT](https://arxiv.org/pdf/1810.04805)(2018) and [CodeBERT](https://arxiv.org/pdf/2002.08155)(2020). Through various tests, this study aims to provide **quantifiable insights** into ModernBERT’s ability to handle programming constructs. Ultimately, this should help developers and researchers decide whether ModernBERT is the right choice for their applications, such as **retrieval-augmented generation (RAG)** and other **code-related tasks.**  
 
+<p align="center">
+  <a href="#figure-5">
+    <img src="figures/show_tokens.png" alt="Figure 5: " width="700">
+  </a>
+</p>
+
+
 Before diving into the evaluations, it is true that BERT is an older model, but it remains widely used. While BERT was not trained on code and has a vocabulary size of **30K**, I include it here as a **baseline** for comparison.  
 
 On the other hand, **CodeBERT** was trained on a large **code corpus** and has a vocabulary size similar to **ModernBERT** (**50K**). *[See Figure 1](#figure-1-model-vocabulary-sizes)*
@@ -165,8 +172,19 @@ For operators, we will use the following documentation pages:
 Unlike keywords, operators present a real challenge for **BERT**. Since it was not trained on a large code corpus, it struggles significantly with operators. **CodeBERT** and **ModernBERT** have decent performances, but **ModernBERT**'s tokenizer seems to be the best in handling operators.
 
 --
-## Token Visualization
-Finally, here are some real tokenized code snippets with language specific constructs of Python, Java and C++.
+
+## Test Data for Reproduction
+
+Finally, here is the dataset containing all the test results. Feel free to reproduce the experiments, but don't forget to **cite this repository**.
+
+| Tokenizer     | Vocab Size | Longest Whitespace Token | Longest Tabs Token | Tab-Space Merging | Python Keywords (%) | Java Keywords (%) | C++ Keywords (%) | Python Operators (%) | Java Operators (%) | C++ Operators (%) |
+|--------------|------------|--------------------------|---------------------|--------------------|----------------------|--------------------|------------------|----------------------|--------------------|------------------|
+| **BERT**      | 30,522     | 0                        | 0                   | ❌                  | 91.4                 | 88.0               | 56.5             | 50.0                 | 43.8               | 38.9             |
+| **CodeBERT**  | 50,265     | 1                        | 1                   | ❌                  | 82.9                 | 76.0               | 62.4             | 67.6                 | 75.0               | 66.7             |
+| **ModernBERT**| 50,280     | 24                       | 6                   | ✅                  | 91.4                 | 86.0               | 71.8             | 82.4                 | 90.6               | 86.1             |
+
+
+
 
 
 
