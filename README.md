@@ -50,8 +50,6 @@ For example, the word **"introduction"** might be tokenized as:  ['introdu', '##
 This means that the token **"##tion"** is **connected to the previous token** ("introdu") without an explicit space before it.  
 
 
-Here’s an updated version of your section with improved readability and flow:
-
 CodeBERT, on the other hand, only has a single token for a single whitespace. This means that two spaces " " are split into two separate tokens. As a result, this tokenizer can be considered less code-aware in comparison to ModernBERT, especially when handling multiple consecutive whitespaces in code.
 
 ModernBERT, however, takes a more efficient approach. It maps sequences of up to 24 consecutive whitespaces to a single token. This allows it to handle longer whitespace sequences more efficiently. For example, a whitespace sequence of length 10 is tokenized into a single token. This is a significant advantage because ModernBERT reduces the number of tokens required for long sequences of spaces, unlike CodeBERT, which would require L tokens for a whitespace sequence of length L.
